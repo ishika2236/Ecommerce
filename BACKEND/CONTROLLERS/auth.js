@@ -3,7 +3,7 @@ const User=require('../Model/user');
 const bcrypt=require('bcrypt');
 const registerUser=async(req,res)=>{
     try{
-        const { name, email, password, role: userRole ,otp} = req.body;
+        const { name, email, password, role: userRole,otp} = req.body;
         let role = 'user';  // Default role
         if(!name|| !email || !password || !otp){
             res.status(403).json({
