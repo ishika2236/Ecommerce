@@ -1,0 +1,19 @@
+*{
+    margin: auto;
+    padding: auto;
+    box-sizing: border-box;
+}
+.productform{
+    /* display: flex;
+    flex-direction: column; */
+    display: flex;
+    flex-wrap: wrap;
+}
+.productlabel{
+    margin: 1rem;
+    
+}
+.productform label{
+    margin: auto;
+    padding: auto;
+}
