@@ -10,12 +10,7 @@ exports.sendOTP = async (req, res) => {
 
         const checkUserPresent = await User.findOne({ email });
 
-        if (checkUserPresent) {
-            return res.status(401).json({
-                success: false,
-                message: 'User is already registered.'
-            });
-        }
+        
 
         let otp = otpGenerator.generate(6, {
             upperCaseAlphabets: false,
@@ -41,6 +36,36 @@ exports.sendOTP = async (req, res) => {
     } catch (error) {
         console.log('Error in sendOTP:', error.message);
         return res.status(500).json({ success: false, error: error.message });
+    }
+}
+exports.verifyLoginOTP=async(req,res)=>{
+    try{
+        console.log('Verifying OTP:', req.body); 
+        console.log('Session data:', req.session.userData);  
+
+        const { otp } = req.body;
+        const {  email, password ,token} = req.session.userData;
+        if (!token|| !email || !password ) {
+            return res.status(400).json({
+                success: false,
+                message: 'User data is missing. Please restart the registration process.',
+            });
+        }
+        const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
+        if (response.length === 0 || otp !== response[0].otp) {
+            return res.status(400).json({
+                success: false,
+                message: 'The OTP is not valid',
+            });
+        }
+
+        console.log("OTP is valid:", otp);
+        return res.status(201).json({message:'User successfullt logged in'});
+
+
+
+    }catch(error){
+
     }
 }
 

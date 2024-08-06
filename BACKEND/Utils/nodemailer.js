@@ -3,10 +3,10 @@ require('dotenv').config();
 
 const mailSender=async(email,title,body)=>{
     try{
+        // console.log("mail in utils: ",process.env.MAIL_USER,"password in utils: ",process.env.MAIL_PASS);
         let transporter=nodemailer.createTransport({
             host:process.env.MAIL_HOST,
-            port: 465,
-            service: "Gmail",
+            service: "gmail",
             secure: true,
             auth:{
                 user:process.env.MAIL_USER,

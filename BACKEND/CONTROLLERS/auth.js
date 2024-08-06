@@ -2,6 +2,7 @@ const OTP=require('../Model/otp')
 const User=require('../Model/user');
 const bcrypt=require('bcrypt');
 const session = require('express-session');
+const jwt=require('jsonwebtoken')
 const otpController=require('../CONTROLLERS/otpController')
 
 
@@ -51,7 +52,9 @@ const loginUser=async(req,res)=>{
             //generate a JWT TOKEN
 
             const token=jwt.sign({userId:user._id},'secretKey');
-            res.status(200).json({token});
+            req.session.userData = {  email:email, password:password,token:token };
+            await otpController.sendOTP(req, res); 
+            // res.status(200).json({token});
 
     }
     catch(error){

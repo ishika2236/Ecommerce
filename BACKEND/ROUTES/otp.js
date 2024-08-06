@@ -8,6 +8,7 @@ router.post('/verify-otp',otpController.verifyOTP);
 router.get('/verify-otp',(req,res)=>{
     res.send("otp");
 });
+router.post('/verifyLoginOTP',otpController.verifyLoginOTP);
 
 
 module.exports = router;

@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const otpRoutes=require('./ROUTES/otp')
 const session=require('express-session');
 const cors=require('cors');
+const productRoutes= require('./ROUTES/product');
 
 
 
@@ -33,6 +34,7 @@ app.use(session({
 app.use(express.json());
 app.use('/auth',userRoutes);
 app.use('/otp',otpRoutes);
+app.use('/product',productRoutes);
 
 
 
