@@ -1,0 +1,31 @@
+/* EditProduct.css */
+.edit-product-form {
+    background-color: var(--background-light);
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 30px auto;
+    animation: slideIn 0.5s ease-out;
+  }
+  
+  .edit-product-form div {
+    margin-bottom: 20px;
+  }
+  
+  .edit-product-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-secondary);
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  @media (max-width: 768px) {
+    .edit-product-form {
+      padding: 20px;
+      margin: 20px 10px;
+    }
+  }

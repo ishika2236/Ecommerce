@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 
 const EditProduct = () => {
+    const token = localStorage.getItem('token');
     const { id } = useParams();
     const navigate = useNavigate();
     const [product, setProduct] = useState({
@@ -21,7 +22,11 @@ const EditProduct = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     useEffect(()=>{
-        axios.get(`http://localhost:8000/product/${id}`)
+        axios.get(`http://localhost:8000/product/${id}`,{
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          })
         .then(response=>{
             setProduct(response.data);
             setLoading(false);
@@ -37,10 +42,14 @@ const EditProduct = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.put(`http://localhost:8000/product/edit/${id}`, product)
+        axios.put(`http://localhost:8000/product/edit/${id}`, product ,{
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          })
             .then(response => {
                 alert('Product updated successfully!');
-                navigate('/products'); 
+                navigate('/myListedProducts'); 
             })
             .catch(err => {
                 setError(err.message);

@@ -1,12 +1,15 @@
 const express = require('express');
 require('dotenv').config();
 const userRoutes = require('./ROUTES/user');
-const {authenticateUser,authorizeUser}=require('./MIDDLEWARES/user')
+const { authenticateUser, authorizeUser } = require('./MIDDLEWARES/user');
 const jwt = require('jsonwebtoken');
 const otpRoutes=require('./ROUTES/otp')
 const session=require('express-session');
 const cors=require('cors');
 const productRoutes= require('./ROUTES/product');
+const cartRoutes=require('./ROUTES/cart')
+const ProfileRouter= require('./ROUTES/profile')
+const orderRouter =  require('./ROUTES/order')
 
 
 
@@ -34,7 +37,10 @@ app.use(session({
 app.use(express.json());
 app.use('/auth',userRoutes);
 app.use('/otp',otpRoutes);
-app.use('/product',productRoutes);
+app.use('/product',authenticateUser,productRoutes);
+app.use('/cart',authenticateUser,cartRoutes);
+app.use('/profile',ProfileRouter);
+app.use('/order',orderRouter);
 
 
 

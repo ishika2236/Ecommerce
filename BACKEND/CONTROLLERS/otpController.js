@@ -2,6 +2,7 @@ const otpGenerator = require('otp-generator');
 const OTP = require('../Model/otp');
 const User = require('../Model/user');
 const bcrypt = require('bcrypt');
+const jwt=require('jsonwebtoken')
 
 exports.sendOTP = async (req, res) => {
     try {
@@ -45,6 +46,7 @@ exports.verifyLoginOTP=async(req,res)=>{
 
         const { otp } = req.body;
         const {  email, password ,token} = req.session.userData;
+        console.log(email,password,token);
         if (!token|| !email || !password ) {
             return res.status(400).json({
                 success: false,
@@ -60,8 +62,10 @@ exports.verifyLoginOTP=async(req,res)=>{
         }
 
         console.log("OTP is valid:", otp);
-        return res.status(201).json({message:'User successfullt logged in'});
-
+        res.status(201).json({ 
+            message: 'User registered successfully',
+            token: token 
+        });
 
 
     }catch(error){
@@ -75,8 +79,8 @@ exports.verifyOTP = async (req, res) => {
         console.log('Session data:', req.session.userData);  // Debug log
 
         const { otp } = req.body;
-        const { name, email, password } = req.session.userData;
-        if (!name || !email || !password ) {
+        const { name, email, password, role, phoneNumber, address, dateOfBirth, profilePicture } = req.session.userData;
+        if (!name || !email || !password || !role || !phoneNumber || !address || !dateOfBirth) {
             return res.status(400).json({
                 success: false,
                 message: 'User data is missing. Please restart the registration process.',
@@ -96,9 +100,25 @@ exports.verifyOTP = async (req, res) => {
         // Create a new user
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
-        const newUser = new User({ name, email, password: hashedPassword });
+        const newUser = new User({
+            name,
+            email,
+            password: hashedPassword,
+            role,
+            phoneNumber,
+            address,
+            dateOfBirth,
+            profilePicture,
+            isEmailVerified: false  // Set email verified to false initially
+        });
         await newUser.save();
-        res.status(201).json({ message: 'User registered successfully' });
+
+        const token = jwt.sign({ userId: newUser._id }, 'secretKey');
+        res.status(201).json({ 
+            message: 'User registered successfully',
+            token: token
+        });
+
     } catch (error) {
         console.error('Error finalizing registration:', error);
         res.status(500).json({ error: 'An error occurred during final registration' });

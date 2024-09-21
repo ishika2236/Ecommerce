@@ -1,4 +1,5 @@
 const mailSender=require('../Utils/nodemailer')
+
 const sendVerificationMail=async(email,otp)=>{
     try {
         const mailResponse= await mailSender(

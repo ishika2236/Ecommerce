@@ -2,15 +2,19 @@ const jwt = require('jsonwebtoken');
 const User = require('../Model/user');
 
 const authenticateUser = async (req, res, next) => {
+    // console.log('hello');
     try {
         const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
-        console.log(req.headers.authorization, token);
+        
         if (!token) {
-            return res.status(401).json({ error: 'Unauthorized' });
+            return res.status(401).json({ message: 'Unauthorized' });
         }
 
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET || 'secretKey'); // Ensure the secret key matches the one used for signing
         req.userId = decodedToken.userId;
+
+        // Assuming user information is stored in the session
+        req.session.userData = { userId: decodedToken.userId };
         next();
     } catch (error) {
         console.log('Error authenticating user:', error);

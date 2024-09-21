@@ -1,0 +1,208 @@
+/* General container for the signup form */
+.signup-container {
+    max-width: 750px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f912;
+    border-radius: 10px;
+    border: 1px solid white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+body{
+    display: flex;
+    justify-content: center;
+}
+
+.signup-heading {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.signup-heading h3 {
+    font-size: 24px;
+    color: #eae8e8;
+}
+
+/* Form container: arranging inputs in rows with flexible layout */
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Styling the labels */
+.signup-form label {
+    font-size: 14px;
+    color: #ebe9e9;
+    margin-bottom: 5px;
+}
+
+/* Styling the input fields with better contrast and focus */
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.signup-form input[type="password"],
+.signup-form input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #d4d0d0;
+    background-color: rgba(83, 83, 83, 0.873);
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+/* Input fields on focus */
+.signup-form input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Submit button styling */
+.signup-form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #1d7be0;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.signup-form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Layout for the address fields: making them responsive */
+.signup-address {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.signup-address label,
+.signup-address input {
+    flex: 1;
+}
+
+/* Specific fields like name, email, phone, and profile */
+.signup-form .signup-name,
+.signup-form .signup-email,
+.signup-form .signup-password,
+.signup-form .signup-phoneNumber,
+.signup-form .signup-dateOfBirth,
+.signup-form .signup-profilePicture {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.signup-form .signup-name input,
+.signup-form .signup-email input,
+.signup-form .signup-password input,
+.signup-form .signup-phoneNumber input,
+.signup-form .signup-dateOfBirth input,
+.signup-form .signup-profilePicture input {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Placeholder styling */
+.signup-form input::placeholder {
+    color: #999;
+}
+
+/* Role toggle for manufacturer signup */
+.signup-role-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.signup-role-toggle label {
+    font-size: 14px;
+    color: #cacaca;
+}
+
+.signup-role-toggle input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-right: 10px;
+}
+
+.signup-login {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.signup-login p {
+    font-size: 14px;
+    color: #cccccc;
+}
+
+.signup-login a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.signup-login a:hover {
+    text-decoration: underline;
+}
+.general-info{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.signup-form input[type="text"]:focus,
+.signup-form input[type="email"]:focus,
+.signup-form input[type="password"]:focus,
+.signup-form input[type="date"]:focus {
+    border-color: #287dd7;
+    outline: none;
+}
+.signup-form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Button hover with shadow effect */
+.signup-form button[type="submit"]:hover {
+    background-color: #0056b3;
+    box-shadow: 0 0 10px rgba(0, 86, 179, 0.6);
+}
+.signup-form .signup-address,
+.signup-form .signup-street,
+.signup-form .signup-city,
+.signup-form .signup-state,
+.signup-form .signup-postalCode,
+.signup-form .signup-country {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+/* Animation for border */
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.signup-form input[type="password"],
+.signup-form input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #d4d0d0;
+    background-color: rgba(83, 83, 83, 0.551);
+    transition: border 0.4s ease, box-shadow 0.4s ease;  /* Adding transition for smooth animation */
+}

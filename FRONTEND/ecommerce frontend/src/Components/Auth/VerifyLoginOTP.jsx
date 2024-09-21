@@ -16,8 +16,15 @@ const VerifyLoginOTP = () => {
             setLoading(true);
 
             const response=await axios.post('http://localhost:8000/otp/verifyLoginOTP',{otp});
+            console.log(response.data);
             setAlert({ message: 'OTP verified successfully!', type: 'success' });
-            navigate('/home');
+            if (response.status === 201) {
+                localStorage.setItem('token', response.data.token);
+                navigate('/home');
+            }
+            // const token=console.log(response.data.token);
+            // localStorage.setItem('token',token);
+            // navigate('/home');
             
         } catch (error) {
             setAlert({ message: 'OTP verification failed. Please check your OTP.', type: 'error' });

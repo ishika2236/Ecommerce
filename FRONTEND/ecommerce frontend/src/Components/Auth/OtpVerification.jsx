@@ -23,8 +23,10 @@ const OtpVerification = () => {
                 },
                 withCredentials: true 
             });
+            console.log(response);
 
             if (response.status === 201) {
+                localStorage.setItem('token', response.data.token);
                 navigate('/home');
             }
         } catch (error) {

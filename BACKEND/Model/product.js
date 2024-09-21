@@ -1,4 +1,5 @@
 const mongoose =require ('mongoose');
+const USER= require('../Model/user')
 
 const productSchema= new mongoose.Schema({
     title:{
@@ -40,6 +41,11 @@ const productSchema= new mongoose.Schema({
     images: {
         type: [String],
         required: false
+    },
+    manufacturerId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'USER',
+        required: true
     }
 
 });
